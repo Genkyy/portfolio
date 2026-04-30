@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0088ff;
+  --color-primary-dark: #0066cc;
+  --color-primary-light: #e6f3ff;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f8fafc;
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-accent: #0088ff;
+  --color-border: #e2e8f0;
+
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+  
+  --radius-xl: 2rem;
+  --radius-lg: 1.5rem;
+  --radius-md: 1rem;
+  --radius-sm: 0.5rem;
+  
+  --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-premium: 0 20px 50px -12px rgba(0, 136, 255, 0.15);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .mesh-gradient {
+    background-color: #ffffff;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(210,100%,95%,1) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(210,100%,98%,1) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(210,100%,96%,1) 0, transparent 50%);
+  }
+}
+
+.soft-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.soft-card:hover {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.06);
+  transform: translateY(-4px);
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #0f172a 0%, #0088ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+}
+
+::selection {
+  background: rgba(0, 136, 255, 0.15);
+  color: #0088ff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border: 3px solid #f8fafc;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0088ff;
+}
+
