@@ -51,6 +51,15 @@ const projects = [
     link: '#',
     image: '/gentok.png',
   },
+  {
+    id: 'corporate-it-inventory',
+    title: 'CorpIT-Hub',
+    category: 'Web App',
+    description: 'Sistem manajemen inventaris IT perusahaan secara terpusat. Mencakup pelacakan aset, IT helpdesk ticketing, manajemen lisensi & jaringan, serta employee lifecycle untuk efisiensi operasional IT.',
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'PostgreSQL'],
+    link: 'https://vercel.com/genkys-projects/corporate-it-inventory',
+    image: '/corporate-it-inventory.png',
+  },
 ];
 
 export const ProjectShowcase = () => {
