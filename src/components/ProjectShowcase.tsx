@@ -1,380 +1,177 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 
 const projects = [
   {
-    title: 'SMA Pertiwi Medan',
+    id: 'gencamp',
+    title: 'Gencamp',
     category: 'Web App',
-    type: 'web',
-    description: 'Sistem manajemen sekolah terintegrasi di SMA Pertiwi Medan, mencakup pendaftaran siswa online, data akademik, dan administrasi.',
-    tech: ['Laravel', 'MySQL', 'Tailwind', 'Alpine.js'],
+    description: 'Platform penyewaan perlengkapan camping premium tanpa ribet. Menyediakan alat bersih, lengkap, dan siap antar. Memberikan pengalaman pemesanan yang mulus bagi para petualang modern.',
+    tech: ['Next.js', 'React', 'Tailwind', 'Framer Motion'],
+    link: 'https://gencamp.vercel.app/',
+    image: '/gencamp.png',
+  },
+  {
+    id: 'kebun',
+    title: 'Kebun Enterprise',
+    category: 'Web App',
+    description: 'Smart dashboard memonitoring KPI perkebunan, capaian lahan, dan operasional harian. Solusi digital terpusat untuk memaksimalkan hasil panen melalui pemantauan data secara real-time.',
+    tech: ['React', 'Vite', 'Tailwind CSS'],
+    link: 'https://monitoring-kebun.vercel.app/',
+    image: '/monitoring-kebun.png',
+  },
+  {
+    id: 'sma',
+    title: 'SMA Pertiwi',
+    category: 'Web App',
+    description: 'Sistem manajemen sekolah terintegrasi, mencakup pendaftaran siswa online, administrasi akademik, dan pendataan guru untuk efisiensi operasional harian sekolah secara digital.',
+    tech: ['Laravel', 'MySQL', 'Alpine.js'],
     link: 'https://smapertiwimedan.sch.id',
     image: '/smapertiwi.png',
   },
   {
-    title: 'LibSpace Inventory',
+    id: 'libspace',
+    title: 'LibSpace',
     category: 'Desktop App',
-    type: 'desktop',
-    description: 'Aplikasi manajemen inventaris dan sirkulasi buku dengan dashboard analitik untuk memantau performa bisnis.',
-    tech: ['React', 'Node.js', 'PostgreSQL', 'SQLite'],
-    link: '#',
+    description: 'Aplikasi manajemen inventaris dan sirkulasi buku perpustakaan. Mengotomatisasi pencatatan peminjaman dan pengembalian, dilengkapi dengan dashboard analitik operasional.',
+    tech: ['React', 'Node.js', 'PostgreSQL'],
+    link: 'https://perpus-exe.vercel.app/',
     image: '/libspace.png',
   },
   {
+    id: 'gentok',
     title: 'Gentok App',
     category: 'Desktop App',
-    type: 'desktop',
-    description: 'Aplikasi interaktif yang dirancang khusus untuk kebutuhan live streaming TikTok dengan fitur yang mulus.',
+    description: 'Aplikasi interaktif yang dirancang khusus untuk kebutuhan live streaming TikTok dengan fitur overlay yang mulus, mendukung interaksi penonton yang lebih tinggi dan real-time.',
     tech: ['Electron.js', 'HTML', 'CSS', 'JavaScript'],
     link: '#',
     image: '/gentok.png',
   },
 ];
 
-/* ─── Mobile Card Carousel ─── */
-const MobileShowcase = () => {
-  const [active, setActive] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  const paginate = (dir: number) => {
-    setDirection(dir);
-    setActive((prev) => {
-      const next = prev + dir;
-      if (next < 0) return projects.length - 1;
-      if (next >= projects.length) return 0;
-      return next;
-    });
-  };
-
-  // Touch / swipe handling
-  const touchStartX = useRef(0);
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const delta = e.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(delta) > 50) paginate(delta < 0 ? 1 : -1);
-  };
-
-  const project = projects[active];
-
-  const slideVariants = {
-    enter: (d: number) => ({ x: d > 0 ? 300 : -300, opacity: 0, scale: 0.92 }),
-    center: { x: 0, opacity: 1, scale: 1 },
-    exit: (d: number) => ({ x: d > 0 ? -300 : 300, opacity: 0, scale: 0.92 }),
-  };
-
+export const ProjectShowcase = () => {
   return (
-    <section id="projects" className="relative bg-white py-20 overflow-hidden">
-      {/* Header */}
-      <div className="px-5 mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-6 h-[1.5px] bg-primary" />
-          <h3 className="text-[8px] uppercase tracking-[0.4em] font-black text-primary font-mono">
-            Curated Work
-          </h3>
-        </div>
-        <h2 className="text-[2rem] font-black tracking-tighter leading-[0.9] uppercase font-heading text-slate-900 italic">
-          Project{' '}
-          <span className="text-gradient-blue not-italic">Showcase.</span>
-        </h2>
-      </div>
+    <section id="projects" className="py-32 bg-white relative overflow-hidden">
+      <div className="container max-w-6xl mx-auto px-6">
+        
+        {/* Header - Sesuai dengan TechStack.tsx dan Hero.tsx */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-24 md:mb-32"
+        >
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 mb-6">
+               <span className="w-12 h-[1.5px] bg-primary" />
+               <h3 className="text-[10px] uppercase tracking-[0.4em] font-black text-primary font-mono">Curated Work</h3>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.85] uppercase font-heading text-slate-900 italic">
+               Project <br/>
+               <span className="text-gradient-blue not-italic">Showcase.</span>
+            </h2>
+          </div>
+          <p className="text-sm text-slate-500 leading-relaxed font-medium max-w-xs lg:pb-4">
+             Kumpulan karya terbaik yang mengutamakan arsitektur modern, performa tinggi, dan pengalaman pengguna interaktif.
+          </p>
+        </motion.div>
 
-      {/* Card Carousel */}
-      <div
-        className="px-4 relative"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={active}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="w-full"
-          >
-            {/* ── Single Card ── */}
-            <div className="bg-white rounded-2xl border border-slate-100 shadow-[0_8px_40px_rgba(0,0,0,0.06)] overflow-hidden">
-              {/* Image Section */}
-              <div className="relative bg-slate-50 p-3">
-                <div className="bg-white rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden flex flex-col">
-                  {/* Browser frame bar */}
-                  <div className="h-5 bg-slate-50/90 flex items-center px-2.5 gap-1 border-b border-slate-100 shrink-0">
-                    <div className="flex gap-[3px]">
-                      <div className="w-[5px] h-[5px] rounded-full bg-red-300/60" />
-                      <div className="w-[5px] h-[5px] rounded-full bg-yellow-300/60" />
-                      <div className="w-[5px] h-[5px] rounded-full bg-green-300/60" />
-                    </div>
-                    <div className="flex-1 mx-2">
-                      <div className="bg-slate-100 rounded-md h-3 flex items-center justify-center">
-                        <span className="text-[6px] font-medium text-slate-400 truncate px-2">
-                          {project.type === 'web'
-                            ? project.link.replace('https://', '')
-                            : `${project.title.toLowerCase().replace(/\s/g, '-')}.app`}
-                        </span>
+        {/* 
+          Zig-Zag Layout Container 
+          Setiap proyek punya card dan ruangnya masing-masing secara bergantian (Kiri-Kanan)
+        */}
+        <div className="flex flex-col gap-24 md:gap-40">
+          {projects.map((project, idx) => {
+            const isEven = idx % 2 === 0;
+
+            return (
+              <motion.div 
+                key={project.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className={`flex flex-col lg:items-center gap-10 lg:gap-16 ${
+                  isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                }`}
+              >
+                {/* Visual Section - Setiap Proyek Punya Card Gambar Sendiri */}
+                <div className="w-full lg:w-3/5 group">
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block relative w-full aspect-[4/3] md:aspect-[16/10] bg-slate-50 p-4 md:p-6 rounded-[3rem] border border-slate-100/50 hover:bg-white hover:shadow-[0_40px_100px_rgba(0,0,0,0.06)] hover:border-primary/20 transition-all duration-500"
+                  >
+                    {/* Inner frame untuk memotong gambar */}
+                    <div className="w-full h-full relative rounded-[2rem] overflow-hidden border border-slate-100 bg-white">
+                      <div className="absolute inset-0 bg-slate-100 animate-pulse -z-10" />
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                        sizes="(max-width: 1024px) 100vw, 60vw"
+                      />
+                      
+                      {/* Tombol Hover di tengah gambar */}
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-md text-slate-900 p-5 rounded-2xl opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 shadow-xl border border-slate-100 hidden md:block">
+                        <ArrowUpRight size={28} />
                       </div>
                     </div>
-                  </div>
-                  {/* Screenshot */}
-                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-white">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 768px) 100vw, 800px"
-                      priority
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="px-5 py-5">
-                {/* Counter + Category */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl font-black text-slate-100 font-heading leading-none">
-                      0{active + 1}
-                    </span>
-                    <span className="text-[8px] font-black uppercase tracking-[0.25em] text-primary font-mono bg-primary/5 px-2.5 py-1 rounded-full">
-                      {project.category}
-                    </span>
-                  </div>
-                  <a
-                    href={project.link}
-                    className="w-8 h-8 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 active:bg-primary active:text-white active:border-primary transition-all"
-                  >
-                    <ExternalLink size={13} />
                   </a>
                 </div>
 
-                {/* Title */}
-                <h4 className="text-xl font-black uppercase tracking-tight mb-2 font-heading text-slate-900 leading-[0.95]">
-                  {project.title}
-                </h4>
-
-                {/* Description */}
-                <p className="text-[13px] text-slate-500 leading-[1.6] font-medium mb-5 line-clamp-3">
-                  {project.description}
-                </p>
-
-                {/* Tech stack */}
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 bg-slate-50 rounded-lg text-[8px] font-black uppercase tracking-[0.12em] text-slate-400 border border-slate-100 font-mono"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Navigation controls */}
-      <div className="flex items-center justify-center gap-6 mt-6 px-5">
-        <button
-          onClick={() => paginate(-1)}
-          className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 active:bg-primary active:text-white active:border-primary transition-all"
-          aria-label="Previous project"
-        >
-          <ChevronLeft size={18} />
-        </button>
-
-        {/* Dots indicator */}
-        <div className="flex items-center gap-2">
-          {projects.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                setDirection(i > active ? 1 : -1);
-                setActive(i);
-              }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === active
-                  ? 'w-6 bg-primary'
-                  : 'w-1.5 bg-slate-200 hover:bg-slate-300'
-              }`}
-              aria-label={`Go to project ${i + 1}`}
-            />
-          ))}
-        </div>
-
-        <button
-          onClick={() => paginate(1)}
-          className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 active:bg-primary active:text-white active:border-primary transition-all"
-          aria-label="Next project"
-        >
-          <ChevronRight size={18} />
-        </button>
-      </div>
-    </section>
-  );
-};
-
-/* ─── Desktop Horizontal Scroll ─── */
-const DesktopShowcase = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const x = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ['0%', `-${(projects.length - 1) * 100}%`]
-  );
-
-  return (
-    <section
-      ref={containerRef}
-      id="projects"
-      className="relative h-[400vh] bg-white pt-32"
-    >
-      <div className="sticky top-0 h-screen flex flex-col justify-start overflow-hidden pt-24">
-        {/* Section Header */}
-        <div className="container max-w-6xl mx-auto px-6 mb-10 shrink-0">
-          <div className="flex items-end justify-between">
-            <div className="max-w-xl">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-8 h-[1.5px] bg-primary" />
-                <h3 className="text-[9px] uppercase tracking-[0.4em] font-black text-primary font-mono">
-                  Curated Work
-                </h3>
-              </div>
-              <h2 className="text-6xl font-black tracking-tighter leading-[0.85] uppercase font-heading text-slate-900 italic">
-                Project <br />
-                <span className="text-gradient-blue not-italic">Showcase.</span>
-              </h2>
-            </div>
-            <div className="text-right pb-4 text-slate-200">
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] mb-2 font-mono italic text-slate-400">
-                0% — 100%
-              </p>
-              <div className="w-32 h-1 bg-slate-100 ml-auto rounded-full overflow-hidden">
-                <motion.div
-                  style={{ scaleX: scrollYProgress }}
-                  className="h-full bg-primary origin-left"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Horizontal Scroll Content */}
-        <div className="flex-1 flex items-center overflow-hidden">
-          <motion.div style={{ x }} className="flex">
-            {projects.map((project, idx) => (
-              <div
-                key={idx}
-                className="w-full flex-shrink-0 flex items-center justify-center px-24"
-              >
-                <motion.div className="w-full max-w-[75rem] bg-slate-50/50 rounded-[3rem] overflow-hidden border border-slate-100 shadow-[0_30px_80px_rgba(0,0,0,0.03)] flex flex-row h-[460px] group/card">
-                  {/* Visual Side (60%) */}
-                  <div className="w-[60%] h-full relative overflow-hidden bg-slate-100/50 flex items-center justify-center">
-                    <div className="w-full h-full p-12 flex items-center justify-center">
-                      <div className="w-full h-full bg-white rounded-xl shadow-[0_25px_50px_rgba(0,0,0,0.1)] border border-white relative overflow-hidden flex flex-col transition-all duration-700 group-hover/card:shadow-[0_30px_60px_rgba(0,136,255,0.15)] group-hover/card:scale-[1.02]">
-                        {/* Frame Header */}
-                        <div className="h-6 bg-slate-50/80 flex items-center px-3 gap-1.5 border-b border-slate-100 shrink-0">
-                          <div className="flex gap-1 w-full">
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-                            <span className="ml-auto text-[7px] font-black text-slate-300 uppercase tracking-widest">
-                              {project.type === 'web'
-                                ? 'web.stream'
-                                : `${project.title.toLowerCase()}.sys`}
-                            </span>
-                          </div>
-                        </div>
-                        {/* Screenshot */}
-                        <div className="flex-1 relative overflow-hidden bg-white">
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-contain object-top transition-transform duration-1000"
-                            sizes="800px"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                {/* Text Section */}
+                <div className="w-full lg:w-2/5 flex flex-col justify-center">
+                  <div className="flex items-center gap-4 mb-6">
+                     <span className="text-4xl md:text-5xl font-black text-slate-200 font-heading leading-none">
+                       0{idx + 1}
+                     </span>
+                     <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                     <span className="text-[10px] uppercase font-black tracking-widest text-primary font-mono">
+                       {project.category}
+                     </span>
                   </div>
 
-                  {/* Content Side (40%) */}
-                  <div className="w-[40%] p-12 flex flex-col justify-center bg-white">
-                    <div className="flex items-center justify-between mb-8">
-                      <span className="text-5xl font-black text-slate-100 font-heading leading-none">
-                        0{idx + 1}
+                  <h4 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-6 font-heading text-slate-900 leading-[0.9]">
+                    {project.title}
+                  </h4>
+                  
+                  <p className="text-base text-slate-500 leading-relaxed font-medium mb-8">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-10">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-500 font-mono"
+                      >
+                        {t}
                       </span>
-                      <div className="flex gap-3">
-                        <a
-                          href={project.link}
-                          className="text-slate-300 hover:text-primary transition-all"
-                        >
-                          <ExternalLink size={16} />
-                        </a>
-                      </div>
-                    </div>
-
-                    <p className="text-[9px] font-black uppercase tracking-[0.3em] text-primary mb-2 font-mono">
-                      {project.category}
-                    </p>
-                    <h4 className="text-3xl font-black uppercase tracking-tighter mb-6 font-heading text-slate-900 leading-[0.85]">
-                      {project.title}
-                    </h4>
-
-                    <p className="text-sm text-slate-500 leading-relaxed font-medium mb-8">
-                      {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-1.5 mt-4">
-                      {project.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="px-2.5 py-1.5 bg-slate-50 rounded-lg text-[8px] font-black uppercase tracking-[0.15em] text-slate-400 border border-slate-100 font-mono transition-colors group-hover/card:border-primary/20 group-hover/card:text-slate-600"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
+                    ))}
                   </div>
-                </motion.div>
-              </div>
-            ))}
-          </motion.div>
+
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-fit flex items-center gap-3 px-6 py-3 bg-slate-900 text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-primary transition-all duration-300 group shadow-xl hover:shadow-primary/20"
+                  >
+                    Visit Project
+                    <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </a>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
-  );
-};
-
-/* ─── Responsive Wrapper ─── */
-export const ProjectShowcase = () => {
-  return (
-    <>
-      {/* Mobile & Tablet: vertical carousel */}
-      <div className="block lg:hidden">
-        <MobileShowcase />
-      </div>
-      {/* Desktop: horizontal scroll */}
-      <div className="hidden lg:block">
-        <DesktopShowcase />
-      </div>
-    </>
   );
 };
