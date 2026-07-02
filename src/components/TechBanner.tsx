@@ -31,7 +31,7 @@ export const TechBanner = () => {
   return (
     <div className="w-full py-10 bg-white border-y border-border overflow-hidden relative">
       <div className="flex overflow-hidden">
-        <motion.div 
+      <motion.div 
           animate={{ x: [0, -1500] }}
           transition={{ 
             duration: 50, 
@@ -40,13 +40,15 @@ export const TechBanner = () => {
             repeatType: "loop"
           }}
           className="flex flex-nowrap gap-16 items-center px-8 min-w-max"
+          style={{ willChange: 'transform' }}
         >
-          {[...techItems, ...techItems, ...techItems].map((tech, i) => (
+          {[...techItems, ...techItems].map((tech, i) => (
             <div key={i} className="flex items-center gap-5 group cursor-default">
               <div className="relative w-7 h-7 filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110">
                 <img 
                   src={`https://cdn.simpleicons.org/${tech.slug}`} 
                   alt={tech.name}
+                  loading="lazy"
                   className="w-full h-full object-contain"
                 />
               </div>

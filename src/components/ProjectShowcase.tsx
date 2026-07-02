@@ -117,13 +117,14 @@ export const ProjectShowcase = () => {
                     className="block relative w-full aspect-[4/3] md:aspect-[16/10] bg-slate-50 p-4 md:p-6 rounded-[3rem] border border-slate-100/50 hover:bg-white hover:shadow-[0_40px_100px_rgba(0,0,0,0.06)] hover:border-primary/20 transition-all duration-500"
                   >
                     {/* Inner frame untuk memotong gambar */}
-                    <div className="w-full h-full relative rounded-[2rem] overflow-hidden border border-slate-100 bg-white">
-                      <div className="absolute inset-0 bg-slate-100 animate-pulse -z-10" />
+                    <div className="w-full h-full relative rounded-[2rem] overflow-hidden border border-slate-100 bg-slate-50">
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
+                        loading="lazy"
                         className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                        style={{ willChange: 'transform' }}
                         sizes="(max-width: 1024px) 100vw, 60vw"
                       />
                       
