@@ -66,7 +66,6 @@ export const CustomCursor = () => {
           translateX: '-50%',
           translateY: '-50%',
           scale,
-          willChange: 'transform',
         }}
       />
       {/* Magnetic Outer Ring */}
@@ -79,7 +78,6 @@ export const CustomCursor = () => {
           translateY: '-50%',
           scale: ringScale,
           opacity: ringOpacity,
-          willChange: 'transform',
         }}
       />
     </>

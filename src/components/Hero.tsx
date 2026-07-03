@@ -113,6 +113,30 @@ export const Hero = () => {
                </p>
             </div>
 
+            {/* Foto hanya tampil di sini (mobile) — di bawah "I am a..." */}
+            <div className="flex justify-center lg:hidden my-8">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                <div className="relative w-[220px] h-[280px] group">
+                  <div className="absolute inset-0 bg-primary/10 rounded-[2.5rem] rotate-3 blur-2xl" />
+                  <div className="absolute inset-0 bg-white border border-slate-100 rounded-[2.5rem] shadow-xl overflow-hidden">
+                    <Image
+                      src="/khoirul-v2.png"
+                      alt="Khoirul Profile"
+                      fill
+                      className="object-contain p-6"
+                      sizes="220px"
+                      priority
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
             <p className="text-base md:text-lg text-slate-500 mb-12 max-w-xl leading-relaxed font-medium mx-auto lg:mx-0 text-center lg:text-left">
                Membangun jembatan antara <span className="text-slate-900">arsitektur kode</span> berkualitas tinggi dan <span className="text-slate-900">infrastruktur jaringan</span> yang handal. 
             </p>
@@ -146,7 +170,8 @@ export const Hero = () => {
           </motion.div>
         </div>
 
-        <div className="lg:col-span-5 relative mt-6 lg:mt-0 flex justify-center lg:justify-end z-10">
+        {/* Foto di kolom kanan — hanya tampil di desktop (lg+) */}
+        <div className="lg:col-span-5 relative mt-6 lg:mt-0 hidden lg:flex justify-center lg:justify-end z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -168,10 +193,9 @@ export const Hero = () => {
 
               {/* Tag 1: Developer - Only visible on LG+ for mobile clarity */}
               <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute -top-4 -right-12 glass p-4 rounded-2xl shadow-xl border-white/50 hidden lg:block"
-                style={{ willChange: 'transform' }}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500"><Terminal size={16} /></div>
@@ -181,10 +205,9 @@ export const Hero = () => {
 
               {/* Tag 2: Network - Only visible on LG+ */}
               <motion.div 
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute top-1/2 -left-20 glass p-4 rounded-2xl shadow-xl border-white/50 hidden lg:block"
-                style={{ willChange: 'transform' }}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-500"><Wifi size={16} /></div>
@@ -194,10 +217,9 @@ export const Hero = () => {
 
               {/* Tag 3: Troubleshooting - Only visible on LG+ */}
               <motion.div 
-                animate={{ x: [0, 10, 0] }}
-                transition={{ duration: 6, repeat: Infinity, delay: 1, ease: 'easeInOut' }}
+                animate={{ x: [0, 8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, delay: 1, ease: 'easeInOut' }}
                 className="absolute -bottom-8 right-0 glass p-4 rounded-2xl shadow-xl border-white/50 hidden lg:block"
-                style={{ willChange: 'transform' }}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-500"><Wrench size={16} /></div>
