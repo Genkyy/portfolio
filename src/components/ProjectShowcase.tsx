@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 
@@ -63,9 +63,9 @@ const projects = [
 ];
 
 // Animasi ringan: once:true agar tidak re-trigger saat scroll balik
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
 };
 
 export const ProjectShowcase = () => {
@@ -108,7 +108,6 @@ export const ProjectShowcase = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className={`flex flex-col lg:items-center gap-10 lg:gap-16 ${
                   isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
                 }`}

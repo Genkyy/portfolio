@@ -87,9 +87,9 @@ export const Hero = () => {
       <div className="container max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center flex-1 py-12">
         <div className="lg:col-span-7 z-10">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex items-center gap-4 mb-6 justify-center lg:justify-start">
               <span className="px-3 py-1 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest rounded-full border border-primary/20">
@@ -116,9 +116,9 @@ export const Hero = () => {
             {/* Foto hanya tampil di sini (mobile) — di bawah "I am a..." */}
             <div className="flex justify-center lg:hidden my-8">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                 className="relative"
               >
                 <div className="relative w-[220px] h-[280px] group">
@@ -173,9 +173,9 @@ export const Hero = () => {
         {/* Foto di kolom kanan — hanya tampil di desktop (lg+) */}
         <div className="lg:col-span-5 relative mt-6 lg:mt-0 hidden lg:flex justify-center lg:justify-end z-10">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0, scale: 0.9, y: 50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             className="relative"
           >
             <div className="relative w-[260px] h-[340px] md:w-[300px] md:h-[400px] group">
